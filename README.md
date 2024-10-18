@@ -12,6 +12,7 @@ The goal of this implementation is not to use sqlite3 and:
 You just need any Gnu-Linux desktop distro, or a WSL (Windows subsystem) distro to put this on the road.  
 
 --> This is just the forked (first commit) code. The new code will be added soon. 
+
 --> And remeber, this is just recreational and educational programming. Do not blame.
 
 
