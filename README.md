@@ -1,4 +1,4 @@
-# Toretto - Tore (TOtall REcall) TTo (... Toretto, The f&f op leyend)
+# Toretto - Tore (TOtall REcall) TTo (... Toretto, The f&f OP Leyend)
 
 This is just a re-implementation of the Tore notification tool developed by Tsoding (... The ~~C~~Zoding OP (I)engginer.  Nice guy, I think).
 
