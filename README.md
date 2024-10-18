@@ -5,7 +5,7 @@ This is just a re-implementation of the Tore notification tool developed by Tsod
 This piece of ~~shit~~ shiny C-code uses the Nob C compiler tool created by Tsoding, an inplemetation of a Fast-&-Simple Standar Plain C Compiler (without any shiny library outside the standar Old School Plain C for Nobs like me).
 
 The goal of this implementation is not to use sqlite3 and: 
-  - Store the data in encrypted binary format.
+  - Store the data in (maybe encrypted) binary format.
   - The data of the entities will be sequences of events (event-sorucered) that, to obtain the current state (projection) their events will be folded since their creation.
   - Possibility to incorporate it as a service of the linux system and use the logged in user as an encryption key.
 
