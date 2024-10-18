@@ -2,7 +2,7 @@
 
 This is just a re-implementation of the Tore notification tool developed by Tsoding (... The Zoding OP (I)engginer nice guy, I think).
 
-This piece of ~~shit~~ shiny C-code uses the Nob C compiler tool created by Tzoding, an inplemetation of a Fast-&-Simple Standar Plain C (without any shiny library outside the standar Old School Plain C for Nobs like me).
+This piece of ~~shit~~ shiny C-code uses the Nob C compiler tool created by Tsoding, an inplemetation of a Fast-&-Simple Standar Plain C (without any shiny library outside the standar Old School Plain C for Nobs like me).
 
 The goal of this implementation is not to use sqlite3 and: 
   - Store the data in encrypted binary format.
