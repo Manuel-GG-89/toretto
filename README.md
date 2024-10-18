@@ -1,6 +1,6 @@
 # Toretto - Tore (TOtall REcall) TTo (... Toretto, The f&f OP Leyend)
 
-This is just a re-implementation of the Tore notification tool developed by Tsoding (... The ~~c~~Zoding OP (I)engginer.  Nice guy, I think).
+This is just a re-implementation of the Tore notification tool developed by Tsoding (... The ~~C... S...~~Zoding OP (I)engginer.  Nice guy, I think).
 
 
 ![Alt text](toretto-tokyo-drift.png)
