@@ -1,5 +1,7 @@
 # Toretto - Tore (TOtall REcall) TTo (... Toretto, The f&f OP Leyend)
 
+--> This is just the forked (first commit) code. The new code will be added soon. 
+
 This is just a re-implementation of the Tore notification tool developed by Tsoding (... The ~~C...S...~~ Zoding OP (I)Engginer.  Nice guy, I think).
 
 
@@ -14,8 +16,6 @@ The goal of this implementation is not to use sqlite3 and:
   - Possibility to incorporate it as a service of the linux system and use the logged in user as an encryption key.
 
 You just need any Gnu-Linux desktop distro, or a WSL (Windows subsystem) distro to put this on the road.  
-
---> This is just the forked (first commit) code. The new code will be added soon. 
 
 --> And remeber, this is just recreational and educational programming. Do not blame.
 
