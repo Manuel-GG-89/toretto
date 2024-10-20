@@ -35,13 +35,14 @@ int main(int argc, char **argv)
     if (!build_sqlite3(&cmd)) return 1;
     nob_cmd_append(&cmd, "cc", "-Wall", "-Wextra", "-ggdb", "-static", "-I./sqlite-amalgamation-3460100/", "-o", BUILD_FOLDER"tore", "tore.c", BUILD_FOLDER"sqlite3.o");
     if (!nob_cmd_run_sync_and_reset(&cmd)) return 1;
+    // TODO: bake git hash into executable
 
     if (argc <= 0) return 0;
     const char *command_name = shift(argv, argc);
     if (strcmp(command_name, "chroot") == 0) {
         // NOTE: this command runs the developed tore in an isolated environment so it does not damage your "production" database file
-#ifdef __linux__
-        // NOTE: this is highly non-crossplatform approach (and that's why it's behind an ifdef)
+#ifdef __linux__ // NOTE: this is highly non-crossplatform approach (and that's why it's behind an ifdef)
+        // TODO: bring local timezone to the chroot environment
         nob_cmd_append(&cmd, "sudo", "HOME=/", "chroot", temp_sprintf("--userspec=%d", getuid()), BUILD_FOLDER, "/tore");
         da_append_many(&cmd, argv, argc);
         if (!nob_cmd_run_sync_and_reset(&cmd)) return 1;

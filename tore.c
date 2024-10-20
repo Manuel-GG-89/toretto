@@ -10,8 +10,6 @@
 
 #define LOG_SQLITE3_ERROR(db) fprintf(stderr, "%s:%d: SQLITE3 ERROR: %s\n", __FILE__, __LINE__, sqlite3_errmsg(db))
 
-// TODO: Use local time for everything
-
 // TODO: Make notifications have a reference to the reminder that created them
 const char *migrations[] = {
     "CREATE TABLE IF NOT EXISTS Notifications (\n"
@@ -35,7 +33,7 @@ bool create_schema(sqlite3 *db, const char *tore_path)
 {
     bool result = true;
     sqlite3_stmt *stmt = NULL;
-    const char *sql = 
+    const char *sql =
         "CREATE TABLE IF NOT EXISTS Migrations (\n"
         "    applied_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n"
         "    query TEXT NOT NULL\n"
@@ -124,7 +122,7 @@ bool load_active_notifications(sqlite3 *db, Notifications *notifs)
     bool result = true;
     sqlite3_stmt *stmt = NULL;
 
-    int ret = sqlite3_prepare_v2(db, "SELECT id, title, created_at FROM Notifications WHERE dismissed_at IS NULL", -1, &stmt, NULL);
+    int ret = sqlite3_prepare_v2(db, "SELECT id, title, datetime(created_at, 'localtime') FROM Notifications WHERE dismissed_at IS NULL", -1, &stmt, NULL);
     if (ret != SQLITE_OK) {
         LOG_SQLITE3_ERROR(db);
         return_defer(false);
@@ -317,6 +315,7 @@ defer:
     return result;
 }
 
+// NOTE: The general policy of the application is that all the date times are stored in GMT, but before displaying them and/or making logical decisions upon them they are converted to localtime.
 bool fire_off_reminders(sqlite3 *db)
 {
     bool result = true;
@@ -324,21 +323,21 @@ bool fire_off_reminders(sqlite3 *db)
     sqlite3_stmt *stmt = NULL;
 
     // Creating new notifications from fired off reminders
-    const char *sql = "INSERT INTO Notifications (title) SELECT title FROM Reminders WHERE scheduled_at <= CURRENT_DATE AND finished_at IS NULL";
+    const char *sql = "INSERT INTO Notifications (title) SELECT title FROM Reminders WHERE scheduled_at <= date('now', 'localtime') AND finished_at IS NULL";
     if (sqlite3_exec(db, sql, NULL, NULL, NULL) != SQLITE_OK) {
         LOG_SQLITE3_ERROR(db);
         return_defer(false);
     }
 
     // Finish all the non-periodic reminders
-    sql = "UPDATE Reminders SET finished_at = CURRENT_TIMESTAMP WHERE scheduled_at <= CURRENT_DATE AND finished_at IS NULL AND period is NULL";
+    sql = "UPDATE Reminders SET finished_at = CURRENT_TIMESTAMP WHERE scheduled_at <= date('now', 'localtime') AND finished_at IS NULL AND period is NULL";
     if (sqlite3_exec(db, sql, NULL, NULL, NULL) != SQLITE_OK) {
         LOG_SQLITE3_ERROR(db);
         return_defer(false);
     }
 
     // Reschedule all the period reminders
-    sql = "UPDATE Reminders SET scheduled_at = date(scheduled_at, period) WHERE scheduled_at <= CURRENT_DATE AND finished_at IS NULL AND period is NOT NULL";
+    sql = "UPDATE Reminders SET scheduled_at = date(scheduled_at, period) WHERE scheduled_at <= date('now', 'localtime') AND finished_at IS NULL AND period is NOT NULL";
     if (sqlite3_exec(db, sql, NULL, NULL, NULL) != SQLITE_OK) {
         LOG_SQLITE3_ERROR(db);
         return_defer(false);
@@ -518,7 +517,7 @@ int main(int argc, char **argv)
 
         // TODO: Allow the scheduled_at to be things like "today", "tomorrow", etc
         // TODO: research if it's possible to enforce the date format on the level of sqlite3 contraints
-        const char *scheduled_at = shift(argv, argc); 
+        const char *scheduled_at = shift(argv, argc);
         if (!verify_date_format(scheduled_at)) {
             fprintf(stderr, "ERROR: %s is not a valid date format\n", scheduled_at);
             return_defer(1);
