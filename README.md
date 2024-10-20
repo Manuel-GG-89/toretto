@@ -15,13 +15,19 @@ The goal of this implementation is not to use sqlite3 and:
   - The data of the entities will be sequences of events (event-sorucered) that, to obtain the current state (projection) their events will be folded since their creation.
   - Possibility to incorporate it as a service of the linux system and use the logged in user as an encryption key.
 
-You just need any Gnu-Linux desktop distro, or a WSL (Windows subsystem) distro to put this on the road.  
+
+
+~~You just need any Gnu-Linux desktop distro, or a WSL (Windows subsystem) distro to put this on the road.~~  
+🥲 maybe no longer
+
 
 --> And remeber, this is just recreational and educational programming. Do not blame.
 
-
+The warning below is form the creator, and its refers to the compiler (I think).
 > [!WARNING]
 > The project is designed for my personal needs only, and may not be suitable for everybody. I do not offer any support for it either. It's completely Open Source, fork it and adapt it to your needs.
+
+
 
 ## Quick Start
 
