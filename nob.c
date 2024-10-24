@@ -32,8 +32,8 @@ int main(int argc, char **argv)
     Nob_Cmd cmd = {0};
 
     if (!nob_mkdir_if_not_exists(BUILD_FOLDER)) return 1;
-    if (!build_sqlite3(&cmd)) return 1;
-    nob_cmd_append(&cmd, "cc", "-Wall", "-Wextra", "-Wswitch-enum", "-ggdb", "-static", "-I./sqlite-amalgamation-3460100/", "-o", BUILD_FOLDER"tore", "tore.c", BUILD_FOLDER"sqlite3.o");
+    //if (!build_sqlite3(&cmd)) return 1;
+    nob_cmd_append(&cmd, "cc", "-Wall", "-Wextra", "-Wswitch-enum", "-ggdb", "-static", "-o", BUILD_FOLDER"toretto", "toretto.c");
     if (!nob_cmd_run_sync_and_reset(&cmd)) return 1;
     // TODO: bake git hash into executable
 
