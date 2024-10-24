@@ -31,7 +31,7 @@ The warning below is form the creator, and its refers to the compiler (I think).
 
 ## Quick Start
 
-# One shot command
+### One shot command
 
 ```console
 $ cc -o nob nob.c && ./nob && sudo cp ./build/toretto /usr/local/bin/ && echo "toretto" >> ~/.bashrc
@@ -39,7 +39,7 @@ $ cc -o nob nob.c && ./nob && sudo cp ./build/toretto /usr/local/bin/ && echo "t
 
 OR
 
-# Commands List
+### Commands List
 
 ```console
 $ cc -o nob nob.c
